@@ -2,6 +2,8 @@
 #include <vector>
 #include <memory>
 #include "Quote.h"
+#include "StrBlob.h"
+#include "StrBlobPtr.h"
 
 using namespace std;
 
@@ -34,6 +36,34 @@ void test_basket() {
     bsk.total_receipt(cout);
 }
 
+void test_StrBlob() {
+    StrBlob str_blob;
+    str_blob.push_back("a");
+    str_blob.push_back("b");
+    str_blob.push_back("c");
+    str_blob.push_back("d");
+    str_blob.push_back("e");
+    cout << "front = " + str_blob.front() << " back = " << str_blob.back() << endl;
+    str_blob.pop_back();
+    cout << "pop back" << endl;
+    cout << "front = " + str_blob.front() << " back = " << str_blob.back() << endl;
+    str_blob.pop_back();
+    cout << "pop back" << endl;
+    cout << "front = " + str_blob.front() << " back = " << str_blob.back() << endl;
+    
+    StrBlob b1;
+    StrBlob b2 = {"a", "an", "the"};
+    cout << "b1.size = "  << b1.size() << " b2.size = " << b2.size() << endl;
+    b1 = b2;
+    b2.push_back("about");
+    cout << "b1.size = " << b1.size() << " b2.size = " << b2.size() << endl;
+    
+    for (shared_ptr<StrBlobPtr> str_blob_ptr = str_blob.begin(); *str_blob_ptr != *str_blob.end(); str_blob_ptr->incr()) {
+        cout << str_blob_ptr->deref() << " ";
+    }
+    cout << endl;
+}
+
 int main(int argc, char **argv)
 {
     Quote basic("Hamlet", 10.0);
@@ -45,5 +75,8 @@ int main(int argc, char **argv)
     // Make a basket of quotes
     make_a_basket_of_quotes();
     test_basket();
+    
+    // Test StrBlob
+    test_StrBlob();
 	return 0;
 }

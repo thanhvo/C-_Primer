@@ -5,3 +5,5 @@
 Makefile
 Debug
 *.mk
+*.out
+*.swp
