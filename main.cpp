@@ -1,9 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <memory>
 #include "Quote.h"
 #include "StrBlob.h"
 #include "StrBlobPtr.h"
+#include "TextQuery.h"
+#include "QueryResult.h"
 
 using namespace std;
 
@@ -64,6 +67,13 @@ void test_StrBlob() {
     cout << endl;
 }
 
+void test_text_query() {
+    ifstream ifs("/home/thanh/workspace/C++_Primer/C_Primer/input/NYT.html", ifstream::in);
+    TextQuery text_query(ifs);
+    QueryResult results = text_query.query("space");
+    print(cout, results) << endl;
+}
+
 int main(int argc, char **argv)
 {
     Quote basic("Hamlet", 10.0);
@@ -78,5 +88,9 @@ int main(int argc, char **argv)
     
     // Test StrBlob
     test_StrBlob();
+    
+    // Test text query
+    test_text_query();
+    
 	return 0;
 }
